@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 #!/usr/local/groundwork/perl/bin/perl -w
 #
 # $Id$
@@ -56,6 +57,7 @@ $opt_v = "2c";
 my $sleeptime = 10; # seconds
 use vars qw($PROGNAME);
 use lib "/usr/local/groundwork/nagios/libexec";
+use lib "/usr/lib64/nagios/plugins";
 use utils qw($TIMEOUT %ERRORS &print_revision &support &usage);
 
 sub print_help ();
