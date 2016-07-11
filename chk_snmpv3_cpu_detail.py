@@ -52,13 +52,14 @@ if results.isdebug:
 
 # if tmpfile existed, read it as last value. 
 # if tmpfile does not existed, save current values as last value, and sleep 10 sec
-if not os.path.exists('/var/tmp/file1'):
+tmpfile = '/var/tmp/chk_snmpv3_cpu_detail' + results.hostname
+if not os.path.exists(tmpfile):
     last_vars = vars
     if results.isdebug:
         print last_vars
     time.sleep(10)
 else:
-    f = open('/var/tmp/file1','r')
+    f = open(tmpfile,'r')
     last_vars = []
     for line in f:
         last_vars.append(line.strip('\n'))
@@ -86,7 +87,7 @@ while i < len(vars):
 if results.isdebug:
     print diff_vars
 
-f = open('/var/tmp/file1','w')
+f = open(tmpfile,'w')
 for i in vars:
     f.write(i)
     f.write('\n')
@@ -112,11 +113,11 @@ else:
     cpu_idle = 0
     cpu_wait = 0
 
-print 'user:%.2f sys:%.2f nice:%.2f idle:%.2f wait:%.2f' % (cpu_user, cpu_sys, cpu_nice, cpu_idle, cpu_wait), 
+print 'user:%.2f nice:%.2f sys:%.2f idle:%.2f wait:%.2f' % (cpu_user, cpu_nice, cpu_sys, cpu_idle, cpu_wait), 
 if results.perfdata:
-    print ' | user=%.2f;;;; sys=%.2f;;;; nice=%.2f;;;; idle=%.2f;;;; wait=%.2f;;;;' % (cpu_user, cpu_sys, cpu_nice, cpu_idle, cpu_wait)
+    print ' | user=%.2f;;;; nice=%.2f;;;; sys=%.2f;;;; idle=%.2f;;;; wait=%.2f;;;;' % (cpu_user, cpu_nice, cpu_sys, cpu_idle, cpu_wait)
 else:
     print ''
 
-sys.exit(1)
+sys.exit(0)
 
