@@ -1,0 +1,3 @@
+yum install perl-Nagios-Plugin
+yum install nagios-plugins-perl
+

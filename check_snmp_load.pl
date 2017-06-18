@@ -1,4 +1,4 @@
-#!/usr/local/groundwork/perl/bin/perl -w 
+#!/usr/bin/perl
 ############################## check_snmp_load #################
 # Version : 1.3.1
 # Date : 8 Sept 2006
@@ -19,6 +19,7 @@ use Getopt::Long;
 # Nagios specific
 
 use lib "/usr/local/groundwork/nagios/libexec";
+use lib "/usr/lib64/nagios/plugins";
 use utils qw(%ERRORS $TIMEOUT);
 #my $TIMEOUT = 15;
 #my %ERRORS=('OK'=>0,'WARNING'=>1,'CRITICAL'=>2,'UNKNOWN'=>3,'DEPENDENT'=>4);

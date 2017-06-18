@@ -40,6 +40,7 @@ my $waitcrit = -1;
 
 my $debug = 0;
 my $perf = 0;
+my $zabbix = 0;
 
 #sysUpTimeInstance
 my $uptimeoid = ".1.3.6.1.2.1.1.3.0";
@@ -47,7 +48,7 @@ my $uptimeoid = ".1.3.6.1.2.1.1.3.0";
 use SNMP;
 use Getopt::Long;
 use Time::HiRes qw(time);
-use vars qw($opt_V $opt_c $opt_s $opt_n $opt_u $opt_i $opt_D $opt_p $opt_h $opt_w);
+use vars qw($opt_V $opt_c $opt_s $opt_n $opt_u $opt_i $opt_D $opt_p $opt_h $opt_w $opt_z);
 use vars qw($opt_H $opt_m $opt_v $opt_o);
 $opt_c = -1;
 $opt_m = "public";
@@ -82,6 +83,7 @@ my $status = GetOptions (
 	"D"   => \$opt_D, "debug"		=> \$opt_D,
 	"o"   => \$opt_o, "port"		=> \$opt_o,
 	"p"   => \$opt_p, "performance"	=> \$opt_p,
+	"z"   => \$opt_z, "zabbix"	=> \$opt_z,
 	"h"   => \$opt_h, "help"		=> \$opt_h
 );
 
@@ -101,6 +103,11 @@ if ($opt_c >= 0) { $cpu = $opt_c; }
 
 # Performance switch
 if ($opt_p) { $perf = 1; }
+
+# Zabbix sender switch
+if ($opt_z) {
+    $zabbix = 1;
+}
 
 # Version
 if ($opt_V) {
@@ -344,7 +351,7 @@ if ($waitcrit > 0) {
 print "$out";
 
 # Performance output
-if ($perf) {;
+if ($perf) {
 	print " |";
 
 	if ($usercrit < 0) { printf(" user=%.2f%%;;;;", $user) }
@@ -364,6 +371,35 @@ if ($perf) {;
 
 #`printf "user=$user;;;;\nnice=$nice;;;;\nsys=$sys;;;;\nidle=$idle;;;;\nwait=$wait;;;;\n" |/usr/local/groundwork/nagios/libexec/perfdata_app.pl -H $opt_H -S check_snmp_cpu_detail `;
 
+}
+
+if ($zabbix) {
+    # confirm your zabbix environment
+    my $zabbix_server = "10.132.71.160";
+    my $zabbix_port = "10051";
+    my $zabbix_servername = "Zabbix server";
+    my $zabbix_sender = "/usr/local/bin/zabbix_sender";
+    my $zabbix_key = $0;
+
+    # make variables to suitable command line
+    $zabbix_server = " -z " . $zabbix_server;
+    $zabbix_port = " -p " . $zabbix_port;
+    $zabbix_servername = " -s '" . $zabbix_servername . "'";
+    $zabbix_sender = $zabbix_sender . " ";
+    $zabbix_key =~ s/.*\///;
+    $zabbix_key =~ s/\.pl//;
+    $zabbix_key = " -k " . $zabbix_key;
+    my $USER = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-user" . " -o " . $user;
+    system($USER);
+    my $SYS = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-sys" . " -o " . $sys;
+    system($SYS);
+    my $IDLE = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-idle" . " -o " . $idle;
+    system($IDLE);
+    print $nice;
+    my $NICE = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-nice" . " -o " . $nice;
+    system($NICE);
+    my $WAIT = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-wait" . " -o " . $wait;
+    system($WAIT);
 }
 
 print "\n";
