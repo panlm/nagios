@@ -382,23 +382,20 @@ if ($zabbix) {
     my $zabbix_key = $0;
 
     # make variables to suitable command line
-    $zabbix_server = " -z " . $zabbix_server;
-    $zabbix_port = " -p " . $zabbix_port;
-    $zabbix_servername = " -s '" . $zabbix_servername . "'";
-    $zabbix_sender = $zabbix_sender . " ";
+    my $zabbix_command = $zabbix_sender . " -z " . $zabbix_server . " -p " . $zabbix_port . " -s '" . $zabbix_servername . "'";
     $zabbix_key =~ s/.*\///;
     $zabbix_key =~ s/\.pl//;
-    $zabbix_key = " -k " . $zabbix_key;
-    my $USER = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-user" . " -o " . $user;
+    $zabbix_command = $zabbix_command . " -k " . $zabbix_key;
+    my $USER = $zabbix_command . "-user" . " -o " . $user;
     system($USER);
-    my $SYS = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-sys" . " -o " . $sys;
+    my $SYS = $zabbix_command . "-sys" . " -o " . $sys;
     system($SYS);
-    my $IDLE = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-idle" . " -o " . $idle;
+    my $IDLE = $zabbix_command . "-idle" . " -o " . $idle;
     system($IDLE);
     print $nice;
-    my $NICE = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-nice" . " -o " . $nice;
+    my $NICE = $zabbix_command . "-nice" . " -o " . $nice;
     system($NICE);
-    my $WAIT = $zabbix_sender . $zabbix_server . $zabbix_port . $zabbix_servername . $zabbix_key . "-wait" . " -o " . $wait;
+    my $WAIT = $zabbix_command . "-wait" . " -o " . $wait;
     system($WAIT);
 }
 
