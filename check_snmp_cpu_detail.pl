@@ -381,9 +381,6 @@ if ($zabbix) {
     my $zabbix_servername = $opt_H;
     my $zabbix_sender = "/usr/local/bin/zabbix_sender";
     my $zabbix_key = $0;
-print $opt_H;
-
-
     # make variables to suitable command line
     my $zabbix_command = $zabbix_sender . " -z " . $zabbix_server . " -p " . $zabbix_port . " -s '" . $zabbix_servername . "'";
     $zabbix_key =~ s/.*\///;
