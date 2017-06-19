@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 #!/usr/local/groundwork/perl/bin/perl -w
 #
 # $Id$
@@ -24,7 +25,7 @@
 #	Initial revision
 #
 use strict;
-use RRDs;
+#use RRDs;
 
 my @sar_vals = undef;
 my @lines = undef;
@@ -39,10 +40,11 @@ my $swaputilcrit = -1;
 
 my $debug = 0;
 my $perf = 0;
+my $zabbix = 0;
 
 use SNMP;
 use Getopt::Long;
-use vars qw($opt_V $opt_c $opt_D $opt_p $opt_h $opt_M $opt_A $opt_S);
+use vars qw($opt_V $opt_c $opt_D $opt_p $opt_h $opt_M $opt_A $opt_S $opt_z);
 use vars qw($opt_H $opt_m $opt_v $opt_o);
 $opt_c = -1;
 $opt_m = "public";
@@ -51,6 +53,7 @@ $opt_v = "2c";
 # Watch out for this: snmpd updates every 5 secs by default
 use vars qw($PROGNAME);
 use lib "/usr/local/groundwork/nagios/libexec";
+use lib "/usr/lib64/nagios/plugins";
 use utils qw($TIMEOUT %ERRORS &print_revision &support &usage);
 
 sub print_help ();
@@ -71,6 +74,7 @@ my $status = GetOptions (
 	"D"   => \$opt_D, "debug"		=> \$opt_D,
 	"o"   => \$opt_o, "port"		=> \$opt_o,
 	"p"   => \$opt_p, "performance"	=> \$opt_p,
+	"z"   => \$opt_z, "zabbix"	=> \$opt_z,
 	"h"   => \$opt_h, "help"		=> \$opt_h
 );
 
@@ -87,6 +91,9 @@ if ($opt_D) { $SNMP::debugging = 1; $debug = 1 }
 
 # Performance switch
 if ($opt_p) { $perf = 1; }
+
+# Zabbix switch
+if ($opt_p) { $zabbix = 1; }
 
 # Version
 if ($opt_V) {
@@ -248,6 +255,34 @@ if ($perf) {
 
 #`printf "totalswap=$totalswap;;;;\navailswap=$availswap;;;;\ntotalmem=$totalmem;;;;\navailmem=$availmem;;;;\nshared=$shared;;;;\nbuffer=$buffer;;;;\ncached=$cached;;;;\nmemutil=$memutil;;;;\nactutil=$actutil;;;;\nswaputil=$swaputil;;;;\n" |/usr/local/groundwork/nagios/libexec/perfdata_app.pl -H $opt_H -S check_snmp_mem_detail `;
 
+}
+
+if ($zabbix) {
+    # confirm your zabbix environment
+    my $zabbix_server = "10.132.71.160";
+    my $zabbix_port = "10051";
+    my $zabbix_servername = $opt_H;
+    my $zabbix_sender = "/usr/local/bin/zabbix_sender";
+    my $zabbix_key = $0;
+    # make variables to suitable command line
+    my $zabbix_command = $zabbix_sender . " -z " . $zabbix_server . " -p " . $zabbix_port . " -s '" . $zabbix_servername . "'";
+    $zabbix_key =~ s/.*\///;
+    $zabbix_key =~ s/\.pl//;
+    $zabbix_command = $zabbix_command . " -k " . $zabbix_key;
+    my $TOTALSWAP = $zabbix_command . "-totalswap" . " -o " . $totalswap;
+    system($TOTALSWAP);
+    my $AVAILSWAP = $zabbix_command . "-availswap" . " -o " . $availswap;
+    system($AVAILSWAP);
+    my $TOTALMEM = $zabbix_command . "-totalmem" . " -o " . $totalmem;
+    system($TOTALMEM);
+    my $AVAILMEM = $zabbix_command . "-availmem" . " -o " . $availmem;
+    system($AVAILMEM);
+    my $SHARED = $zabbix_command . "-shared" . " -o " . $shared;
+    system($SHARED);
+    my $BUFFER = $zabbix_command . "-buffer" . " -o " . $buffer;
+    system($BUFFER);
+    my $CACHED = $zabbix_command . "-cached" . " -o " . $cached;
+    system($CACHED);
 }
 
 print "\n";

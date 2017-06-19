@@ -392,7 +392,6 @@ if ($zabbix) {
     system($SYS);
     my $IDLE = $zabbix_command . "-idle" . " -o " . $idle;
     system($IDLE);
-    print $nice;
     my $NICE = $zabbix_command . "-nice" . " -o " . $nice;
     system($NICE);
     my $WAIT = $zabbix_command . "-wait" . " -o " . $wait;
