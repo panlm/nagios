@@ -377,9 +377,12 @@ if ($zabbix) {
     # confirm your zabbix environment
     my $zabbix_server = "10.132.71.160";
     my $zabbix_port = "10051";
-    my $zabbix_servername = "Zabbix server";
+    #my $zabbix_servername = "Zabbix server";
+    my $zabbix_servername = $opt_H;
     my $zabbix_sender = "/usr/local/bin/zabbix_sender";
     my $zabbix_key = $0;
+print $opt_H;
+
 
     # make variables to suitable command line
     my $zabbix_command = $zabbix_sender . " -z " . $zabbix_server . " -p " . $zabbix_port . " -s '" . $zabbix_servername . "'";
@@ -413,7 +416,7 @@ exit (0); #OK
 
 # Usage sub
 sub print_usage () {
-        print "Usage: $PROGNAME 
+        print "Usage: $PROGNAME $0
 	[-C], --Community <community>
 	[-h], --help
 	[-H], --host
