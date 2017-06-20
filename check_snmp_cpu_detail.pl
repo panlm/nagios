@@ -453,6 +453,8 @@ sub print_help () {
    SNMP port to use
 -p, --performance
    Report Nagios performance data after the ouput string
+-z, --zabbix
+   Report performance data to zabbix with zabbix_sender
 -s, --system=STRING
    Percent CPU system
 -t, --timeout

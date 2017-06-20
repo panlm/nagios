@@ -52,7 +52,7 @@ if results.isdebug:
 
 # if tmpfile existed, read it as last value. 
 # if tmpfile does not existed, save current values as last value, and sleep 10 sec
-tmpfile = '/var/tmp/chk_snmpv3_cpu_detail' + results.hostname
+tmpfile = '/var/tmp/chk_snmpv3_cpu_detail-' + results.hostname
 if not os.path.exists(tmpfile):
     last_vars = vars
     if results.isdebug:
