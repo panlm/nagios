@@ -61,7 +61,7 @@ if param.isdebug:
 
 # if tmpfile existed, read it as last value. 
 # if tmpfile does not existed, save current values as last value, and sleep 10 sec
-tmpfile = '/var/tmp/chk_snmpv3_cpu_detail-' + param.hostname
+tmpfile = '/var/tmp/' + re.sub('\..*$', '', re.sub('^.*/', r'', sys.argv[0])) + '-' + param.hostname
 if not os.path.exists(tmpfile):
     last_vars = vars
     if param.isdebug:
@@ -74,6 +74,7 @@ else:
         last_vars.append(line.strip('\n'))
     if param.isdebug:
         print last_vars
+    os.chmod(tmpfile, 0o0666)
     f.close()
 
 # get newest value (get again)
@@ -100,6 +101,8 @@ f = open(tmpfile,'w')
 for i in vars:
     f.write(i)
     f.write('\n')
+#os.fchmod(f, 0666)
+os.chmod(tmpfile, 0o0666)
 f.close()
 
 total = 0
