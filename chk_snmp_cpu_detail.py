@@ -1,20 +1,24 @@
 #!/usr/bin/env python
+# depends py-zabbix, using 'pip install py-zabbix' to install it.
 # snmpwalk -v3 -l authPriv -u nutanix -A '12345678' -a SHA -x AES -X '12345678' 10.132.68.23 .system
 # session = netsnmp.Session(DestHost='10.132.68.23', Version=3, SecLevel='authPriv', AuthProto='SHA', AuthPass='12345678', PrivProto='AES', PrivPass='12345678', SecName='nutanix')
 # version 1
 
+import re
 import sys
 import os
 import time
 import netsnmp
 import argparse
+from pyzabbix import ZabbixAPI, ZabbixMetric, ZabbixSender
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-v', action="store", dest='snmpversion', default=2, type=int)
+parser.add_argument('-v', '--version', action="store", dest='snmpversion', default=2, type=int)
 parser.add_argument('-H', '--hostname', action="store", dest='hostname', default='localhost')
-parser.add_argument('-C', action="store", dest='community', default='public')
-parser.add_argument('-p', action="store_true", dest='perfdata', default=False)
-parser.add_argument('--debug', action="store_true", dest='isdebug', default=False)
+parser.add_argument('-C', '--community', action="store", dest='community', default='public')
+parser.add_argument('-p', '--perfdata', action="store_true", dest='perfdata', default=False)
+parser.add_argument('-z', '--zabbix', action="store_true", dest='zabbix', default=False)
+parser.add_argument('-D', '--debug', action="store_true", dest='isdebug', default=False)
 # for snmp v3
 parser.add_argument('-u', '--username', action="store", dest='username', default='')
 parser.add_argument('-l', action="store", dest='seclevel', default='authPriv')
@@ -22,21 +26,26 @@ parser.add_argument('-a', action="store", dest='authproto', default='SHA')
 parser.add_argument('-A', action="store", dest='authpass', default='')
 parser.add_argument('-x', action="store", dest='privproto', default='AES')
 parser.add_argument('-X', action="store", dest='privpass', default='')
+# for zabbix
+parser.add_argument('--zabbix_server', action="store", dest='zabbix_server', default='10.132.71.160')
+parser.add_argument('--zabbix_user', action="store", dest='zabbix_user', default='Admin')
+parser.add_argument('--zabbix_pass', action="store", dest='zabbix_pass', default='zabbix')
+#    zabbix_server = '10.132.71.160'
+#    zabbix_user = 'Admin'
+#    zabbix_password = 'zabbix'
 
-results = parser.parse_args()
+param = parser.parse_args()
+if param.isdebug:
+    print param.zabbix_server,param.zabbix_user,param.zabbix_pass
 
-#print results.hostname
-#print results.community
-#print results.perfdata
-
-if results.snmpversion == '3':
-    if results.username == '' or results.authpass == '' or results.privpass == '':
+if param.snmpversion == '3':
+    if param.username == '' or param.authpass == '' or param.privpass == '':
         print "-u, -A and -X are needed when snmpversion is 3\n"
         sys.exit(1)
 
 uptimeoid = ".1.3.6.1.2.1.1.3.0"
 
-session = netsnmp.Session(DestHost=results.hostname, Version=results.snmpversion, SecLevel=results.seclevel, AuthProto=results.authproto, AuthPass=results.authpass, PrivProto=results.privproto, PrivPass=results.privpass, SecName=results.username)
+session = netsnmp.Session(DestHost=param.hostname, Version=param.snmpversion, SecLevel=param.seclevel, AuthProto=param.authproto, AuthPass=param.authpass, PrivProto=param.privproto, PrivPass=param.privpass, SecName=param.username)
 #vars = netsnmp.VarList(netsnmp.Varbind('sysDescr', '0'))
 string = netsnmp.VarList(netsnmp.Varbind(uptimeoid),
                          netsnmp.Varbind('ssCpuRawUser', '0'),
@@ -47,15 +56,15 @@ string = netsnmp.VarList(netsnmp.Varbind(uptimeoid),
 
 # get current values
 vars = session.get(string)
-if results.isdebug:
+if param.isdebug:
     print vars
 
 # if tmpfile existed, read it as last value. 
 # if tmpfile does not existed, save current values as last value, and sleep 10 sec
-tmpfile = '/var/tmp/chk_snmpv3_cpu_detail-' + results.hostname
+tmpfile = '/var/tmp/chk_snmpv3_cpu_detail-' + param.hostname
 if not os.path.exists(tmpfile):
     last_vars = vars
-    if results.isdebug:
+    if param.isdebug:
         print last_vars
     time.sleep(10)
 else:
@@ -63,13 +72,13 @@ else:
     last_vars = []
     for line in f:
         last_vars.append(line.strip('\n'))
-    if results.isdebug:
+    if param.isdebug:
         print last_vars
     f.close()
 
 # get newest value (get again)
 vars = session.get(string)
-if results.isdebug:
+if param.isdebug:
     print "get again"
     print vars
 
@@ -84,7 +93,7 @@ while i < len(vars):
         b = b + 4294967295 + 1
     diff_vars.append(b - a)
     i = i + 1
-if results.isdebug:
+if param.isdebug:
     print diff_vars
 
 f = open(tmpfile,'w')
@@ -96,7 +105,7 @@ f.close()
 total = 0
 for i in diff_vars:
     total = total + i
-if results.isdebug:
+if param.isdebug:
     print "total:%s\n" % (total)
 
 # prevent you run this script too fast.
@@ -114,10 +123,27 @@ else:
     cpu_wait = 0
 
 print 'user:%.2f nice:%.2f sys:%.2f idle:%.2f wait:%.2f' % (cpu_user, cpu_nice, cpu_sys, cpu_idle, cpu_wait), 
-if results.perfdata:
+if param.perfdata:
     print ' | user=%.2f;;;; nice=%.2f;;;; sys=%.2f;;;; idle=%.2f;;;; wait=%.2f;;;;' % (cpu_user, cpu_nice, cpu_sys, cpu_idle, cpu_wait)
 else:
     print ''
+
+if param.zabbix:
+    zabbix_api = ZabbixAPI(url='http://'+param.zabbix_server+'/zabbix/', user=param.zabbix_user, password=param.zabbix_pass)
+    zabbix_key = re.sub('\..*$', '', re.sub('^.*/', r'', sys.argv[0]))
+    #result = zapi.host.get(status=1)
+    #hostnames = [host['host'] for host in result]
+    #print hostnames
+    packet = [
+        ZabbixMetric(param.hostname, zabbix_key + '-user', cpu_user),
+        ZabbixMetric(param.hostname, zabbix_key + '-sys', cpu_sys),
+        ZabbixMetric(param.hostname, zabbix_key + '-nice', cpu_nice),
+        ZabbixMetric(param.hostname, zabbix_key + '-wait', cpu_wait),
+        ZabbixMetric(param.hostname, zabbix_key + '-idle', cpu_idle),
+    ]
+    result = ZabbixSender(use_config=False).send(packet)
+    if param.isdebug:
+        print result
 
 sys.exit(0)
 
