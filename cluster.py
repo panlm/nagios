@@ -69,22 +69,6 @@ vmcount = 0
 for i in vars:
     vmcount = vmcount + int(i)
 
-# get vmcount
-string = netsnmp.VarList('hypervisorReadIOPerSecond')
-vars = session.walk(string)
-iopsread = 0
-for i in vars:
-    iopsread = iopsread + int(i)
-
-# get vmcount
-string = netsnmp.VarList('hypervisorWriteIOPerSecond.1')
-vars = session.walk(string)
-iopswrite = 0
-for i in vars:
-    iopswrite = iopswrite + int(i)
-
-iopstotal = iopsread + iopswrite
-
 if param.zabbix:
     zabbix_api = ZabbixAPI(url='http://'+param.zabbix_server+'/zabbix/', user=param.zabbix_user, password=param.zabbix_pass)
     zabbix_key = re.sub('\..*$', '', re.sub('^.*/', r'', sys.argv[0]))
@@ -94,9 +78,6 @@ if param.zabbix:
     packet = [
         ZabbixMetric(param.hostname, zabbix_key + 'CpuUsagePercent', cpuusage),
         ZabbixMetric(param.hostname, zabbix_key + 'MemUsagePercent', memusage),
-        ZabbixMetric(param.hostname, zabbix_key + 'IopsRead', iopsread),
-        ZabbixMetric(param.hostname, zabbix_key + 'IopsWrite', iopswrite),
-        ZabbixMetric(param.hostname, zabbix_key + 'IopsTotal', iopstotal),
         ZabbixMetric(param.hostname, zabbix_key + 'VmCount', vmcount),
     ]
     result = ZabbixSender(use_config=False).send(packet)
