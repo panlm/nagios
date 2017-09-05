@@ -28,7 +28,7 @@ parser.add_argument('-A', action="store", dest='authpass', default='12345678')
 parser.add_argument('-x', action="store", dest='privproto', default='AES')
 parser.add_argument('-X', action="store", dest='privpass', default='12345678')
 # for zabbix
-parser.add_argument('--zabbix_server', action="store", dest='zabbix_server', default='10.132.71.160')
+parser.add_argument('--zabbix_server', action="store", dest='zabbix_server', default='zabbix')
 parser.add_argument('--zabbix_user', action="store", dest='zabbix_user', default='Admin')
 parser.add_argument('--zabbix_pass', action="store", dest='zabbix_pass', default='zabbix')
 #    zabbix_server = '10.132.71.160'
