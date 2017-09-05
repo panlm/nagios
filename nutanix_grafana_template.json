@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_ZABBIX",
-      "label": "zabbix",
+      "name": "DS_ZABBIX2",
+      "label": "zabbix2",
       "description": "",
       "type": "datasource",
       "pluginId": "alexanderzobnin-zabbix-datasource",
@@ -58,7 +58,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -83,7 +83,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 3,
+          "minSpan": 2,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -97,7 +97,7 @@
               "to": "null"
             }
           ],
-          "span": 3,
+          "span": 2,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -150,7 +150,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -188,7 +188,7 @@
               "to": "null"
             }
           ],
-          "span": 3,
+          "span": 2,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -219,7 +219,7 @@
             }
           ],
           "thresholds": "60,80",
-          "title": "鍐呭瓨",
+          "title": "Memory",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -240,7 +240,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -279,7 +279,7 @@
               "to": "null"
             }
           ],
-          "span": 3,
+          "span": 2,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -310,7 +310,7 @@
             }
           ],
           "thresholds": "60,80",
-          "title": "瀛樺偍",
+          "title": "Storage",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -331,7 +331,7 @@
             "rgba(237, 40, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -401,7 +401,7 @@
             }
           ],
           "thresholds": "1",
-          "title": "涓ラ噸",
+          "title": "Critical",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -422,7 +422,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -492,7 +492,7 @@
             }
           ],
           "thresholds": "1",
-          "title": "璀﹀憡",
+          "title": "Warning",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -513,7 +513,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -552,7 +552,7 @@
               "to": "null"
             }
           ],
-          "span": 2,
+          "span": 1,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -583,7 +583,7 @@
             }
           ],
           "thresholds": "",
-          "title": "铏氭嫙鏈烘暟閲?,
+          "title": "VMs",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -604,7 +604,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "bytes",
           "gauge": {
             "maxValue": 100,
@@ -674,7 +674,7 @@
             }
           ],
           "thresholds": "",
-          "title": "璇诲啓鍚炲悙",
+          "title": "IO Bandwidth",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -695,7 +695,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "ms",
           "gauge": {
             "maxValue": 100,
@@ -765,7 +765,7 @@
             }
           ],
           "thresholds": "10,20",
-          "title": "璇诲啓寤惰繜",
+          "title": "IO Lantency",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -786,7 +786,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -856,97 +856,7 @@
             }
           ],
           "thresholds": "",
-          "title": "姣忕璇诲啓",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "${DS_ZABBIX}",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "125",
-          "id": 18,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "application": {
-                "filter": "Nutanix Cluster"
-              },
-              "functions": [],
-              "group": {
-                "filter": "$group"
-              },
-              "host": {
-                "filter": "$clustername"
-              },
-              "item": {
-                "filter": "Cluster IOPS Total"
-              },
-              "mode": 0,
-              "options": {
-                "showDisabledItems": false
-              },
-              "refId": "A"
-            }
-          ],
-          "thresholds": "",
-          "title": "IOPS Total",
+          "title": "IOPS",
           "type": "singlestat",
           "valueFontSize": "80%",
           "valueMaps": [
@@ -975,7 +885,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 7,
           "legend": {
@@ -1073,7 +983,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 8,
           "legend": {
@@ -1170,7 +1080,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 9,
           "legend": {
@@ -1259,7 +1169,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 15,
           "legend": {
@@ -1360,7 +1270,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 12,
           "legend": {
@@ -1449,7 +1359,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 11,
           "legend": {
@@ -1550,7 +1460,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 13,
           "legend": {
@@ -1639,7 +1549,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX}",
+          "datasource": "${DS_ZABBIX2}",
           "fill": 1,
           "id": 14,
           "legend": {
@@ -1762,7 +1672,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_ZABBIX}",
+        "datasource": "${DS_ZABBIX2}",
         "hide": 1,
         "includeAll": false,
         "label": "clustername",
@@ -1782,7 +1692,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -1811,6 +1721,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "SH-COLO",
-  "version": 40
+  "title": "HTSec-Nutanix",
+  "version": 5
 }
