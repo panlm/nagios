@@ -44,6 +44,7 @@
   "hideControls": false,
   "id": null,
   "links": [],
+  "refresh": "10s",
   "rows": [
     {
       "collapse": false,
@@ -332,6 +333,7 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
+          "decimals": 0,
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -423,6 +425,7 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
+          "decimals": 0,
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -605,6 +608,7 @@
             "rgba(50, 172, 45, 0.97)"
           ],
           "datasource": "${DS_ZABBIX}",
+          "decimals": 2,
           "format": "bytes",
           "gauge": {
             "maxValue": 100,
@@ -696,6 +700,7 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
+          "decimals": 1,
           "format": "ms",
           "gauge": {
             "maxValue": 100,
@@ -787,6 +792,7 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
+          "decimals": 0,
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -2254,6 +2260,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 11
+  "version": 14
 }
 
