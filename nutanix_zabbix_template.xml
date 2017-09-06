@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2017-09-03T12:01:55Z</date>
+    <date>2017-09-06T02:51:49Z</date>
     <groups>
         <group>
             <name>CVM</name>
@@ -45,12 +45,12 @@
             </applications>
             <items>
                 <item>
-                    <name>cluster.py</name>
+                    <name>check_nutanix_cluster.py</name>
                     <type>10</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>cluster.py[&quot;-D&quot;,&quot;-H&quot;,&quot;{HOSTNAME}&quot;,&quot;-z&quot;,-v,3,-u,{$SNMPV3_USER},-X,{$SNMPV3_AES_KEY},-A,{$SNMPV3_SHA_KEY}]</key>
+                    <key>check_nutanix_cluster.py[&quot;-D&quot;,&quot;-H&quot;,&quot;{HOSTNAME}&quot;,&quot;-z&quot;,-v,3,-u,{$SNMPV3_USER},-X,{$SNMPV3_AES_KEY},-A,{$SNMPV3_SHA_KEY}]</key>
                     <delay>30</delay>
                     <history>90</history>
                     <trends>0</trends>
