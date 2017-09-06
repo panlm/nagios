@@ -44,10 +44,9 @@
   "hideControls": false,
   "id": null,
   "links": [],
-  "refresh": "30s",
   "rows": [
     {
-      "collapse": true,
+      "collapse": false,
       "height": "256",
       "panels": [
         {
@@ -878,7 +877,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "height": "250",
       "panels": [
         {
@@ -1395,7 +1394,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "height": 250,
       "panels": [
         {
@@ -1655,7 +1654,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "height": 250,
       "panels": [
         {
@@ -1958,8 +1957,12 @@
               "functions": [
                 {
                   "def": {
-                    "name": "top",
                     "category": "Filter",
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ],
+                    "name": "top",
                     "params": [
                       {
                         "name": "number",
@@ -1967,7 +1970,6 @@
                       },
                       {
                         "name": "value",
-                        "type": "string",
                         "options": [
                           "avg",
                           "min",
@@ -1975,12 +1977,9 @@
                           "sum",
                           "count",
                           "median"
-                        ]
+                        ],
+                        "type": "string"
                       }
-                    ],
-                    "defaultParams": [
-                      5,
-                      "avg"
                     ]
                   },
                   "params": [
@@ -2082,8 +2081,12 @@
               "functions": [
                 {
                   "def": {
-                    "name": "top",
                     "category": "Filter",
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ],
+                    "name": "top",
                     "params": [
                       {
                         "name": "number",
@@ -2091,7 +2094,6 @@
                       },
                       {
                         "name": "value",
-                        "type": "string",
                         "options": [
                           "avg",
                           "min",
@@ -2099,12 +2101,9 @@
                           "sum",
                           "count",
                           "median"
-                        ]
+                        ],
+                        "type": "string"
                       }
-                    ],
-                    "defaultParams": [
-                      5,
-                      "avg"
                     ]
                   },
                   "params": [
@@ -2206,9 +2205,9 @@
         "allValue": null,
         "current": {},
         "datasource": "${DS_ZABBIX}",
-        "hide": 1,
+        "hide": 0,
         "includeAll": false,
-        "label": "clustername",
+        "label": "Clustername",
         "multi": true,
         "name": "clustername",
         "options": [],
@@ -2255,5 +2254,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 7
+  "version": 11
 }
+
