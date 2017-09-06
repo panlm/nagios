@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_ZABBIX2",
-      "label": "zabbix2",
+      "name": "DS_ZABBIX",
+      "label": "zabbix",
       "description": "",
       "type": "datasource",
       "pluginId": "alexanderzobnin-zabbix-datasource",
@@ -44,6 +44,7 @@
   "hideControls": false,
   "id": null,
   "links": [],
+  "refresh": "30s",
   "rows": [
     {
       "collapse": false,
@@ -58,7 +59,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -150,7 +151,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -240,7 +241,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -331,7 +332,7 @@
             "rgba(237, 40, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -422,7 +423,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -513,7 +514,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -604,7 +605,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "bytes",
           "gauge": {
             "maxValue": 100,
@@ -695,7 +696,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "ms",
           "gauge": {
             "maxValue": 100,
@@ -786,7 +787,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -885,7 +886,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 7,
           "legend": {
@@ -903,7 +904,7 @@
           "minSpan": 6,
           "nullPointMode": "null",
           "percentage": false,
-          "pointradius": 5,
+          "pointradius": 1,
           "points": false,
           "renderer": "flot",
           "repeat": null,
@@ -917,7 +918,41 @@
               "application": {
                 "filter": "/Hypervisor /"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)"
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -931,7 +966,11 @@
               "options": {
                 "showDisabledItems": false
               },
-              "refId": "A"
+              "refId": "A",
+              "slaProperty": {
+                "name": "SLA",
+                "property": "sla"
+              }
             }
           ],
           "thresholds": [
@@ -948,7 +987,7 @@
           "title": "CPU",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -983,7 +1022,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 8,
           "legend": {
@@ -1014,7 +1053,41 @@
               "application": {
                 "filter": "/Hypervisor /"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)"
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1031,21 +1104,13 @@
               "refId": "A"
             }
           ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": false,
-              "op": "gt",
-              "value": 90
-            }
-          ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Memory",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1080,7 +1145,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 9,
           "legend": {
@@ -1111,7 +1176,41 @@
               "application": {
                 "filter": "Nutanix Containers"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)"
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1131,10 +1230,10 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Storager Capacity",
+          "title": "Storager Capacity %",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1169,7 +1268,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 15,
           "legend": {
@@ -1200,7 +1299,41 @@
               "application": {
                 "filter": "Nutanix Containers"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "20",
+                    "avg"
+                  ],
+                  "text": "top(20, avg)"
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1223,7 +1356,7 @@
           "title": "Storager Capacity",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1270,7 +1403,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 12,
           "legend": {
@@ -1301,7 +1434,42 @@
               "application": {
                 "filter": "Nutanix Containers"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)",
+                  "added": false
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1324,7 +1492,7 @@
           "title": "Latency",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1359,7 +1527,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 11,
           "legend": {
@@ -1390,7 +1558,42 @@
               "application": {
                 "filter": "Nutanix Containers"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)",
+                  "added": false
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1413,7 +1616,7 @@
           "title": "Storage IOPS",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1460,7 +1663,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 13,
           "legend": {
@@ -1491,7 +1694,42 @@
               "application": {
                 "filter": "/Hypervisor /"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)",
+                  "added": false
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1514,7 +1752,7 @@
           "title": "Network Drop Count",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1549,7 +1787,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_ZABBIX2}",
+          "datasource": "${DS_ZABBIX}",
           "fill": 1,
           "id": 14,
           "legend": {
@@ -1557,7 +1795,7 @@
             "current": false,
             "max": false,
             "min": false,
-            "show": true,
+            "show": false,
             "total": false,
             "values": false
           },
@@ -1580,7 +1818,42 @@
               "application": {
                 "filter": "/Hypervisor /"
               },
-              "functions": [],
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)",
+                  "added": false
+                }
+              ],
               "group": {
                 "filter": "$group"
               },
@@ -1603,7 +1876,7 @@
           "title": "Network Rx/Tx Bytes",
           "tooltip": {
             "shared": true,
-            "sort": 0,
+            "sort": 2,
             "value_type": "individual"
           },
           "type": "graph",
@@ -1672,7 +1945,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_ZABBIX2}",
+        "datasource": "${DS_ZABBIX}",
         "hide": 1,
         "includeAll": false,
         "label": "clustername",
@@ -1692,7 +1965,7 @@
     ]
   },
   "time": {
-    "from": "now-2d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1722,5 +1995,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 5
+  "version": 2
 }
+
