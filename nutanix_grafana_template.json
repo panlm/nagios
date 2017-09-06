@@ -47,7 +47,7 @@
   "refresh": "30s",
   "rows": [
     {
-      "collapse": false,
+      "collapse": true,
       "height": "256",
       "panels": [
         {
@@ -878,7 +878,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": "250",
       "panels": [
         {
@@ -1395,7 +1395,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -1655,7 +1655,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -2041,12 +2041,136 @@
               "show": true
             }
           ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_ZABBIX}",
+          "fill": 1,
+          "id": 19,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 12,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "clustername",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Nutanix Virtual Machines"
+              },
+              "functions": [
+                {
+                  "def": {
+                    "name": "top",
+                    "category": "Filter",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "type": "string",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ]
+                      }
+                    ],
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)"
+                }
+              ],
+              "group": {
+                "filter": "$group"
+              },
+              "host": {
+                "filter": "$clustername"
+              },
+              "item": {
+                "filter": "/VM Memory Usage/"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Top 10  VM MEM % in $clustername",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": "100",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
         }
       ],
       "repeat": null,
       "repeatIteration": null,
       "repeatRowId": null,
-      "showTitle": false,
+      "showTitle": true,
       "title": "$clustername VM Info",
       "titleSize": "h6"
     }
@@ -2131,6 +2255,5 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 4
+  "version": 7
 }
-
