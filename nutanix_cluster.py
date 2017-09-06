@@ -72,6 +72,7 @@ for i in vars:
 if param.zabbix:
     zabbix_api = ZabbixAPI(url='http://'+param.zabbix_server+'/zabbix/', user=param.zabbix_user, password=param.zabbix_pass)
     zabbix_key = re.sub('\..*$', '', re.sub('^.*/', r'', sys.argv[0]))
+    zabbix_key = 'cluster'
     #result = zapi.host.get(status=1)
     #hostnames = [host['host'] for host in result]
     #print hostnames
