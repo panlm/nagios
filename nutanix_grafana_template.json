@@ -359,7 +359,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 1,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -394,7 +394,7 @@
                 "filter": "$clustername"
               },
               "item": {
-                "filter": "Cluster Alert Critical"
+                "filter": "Cluster Alert CRITICAL"
               },
               "mode": 0,
               "options": {
@@ -451,7 +451,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 1,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -486,7 +486,7 @@
                 "filter": "$clustername"
               },
               "item": {
-                "filter": "Cluster Alert Warning"
+                "filter": "Cluster Alert WARNING"
               },
               "mode": 0,
               "options": {
@@ -526,7 +526,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "height": "125",
+          "height": "120",
           "id": 10,
           "interval": null,
           "links": [],
@@ -542,7 +542,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 2,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -618,7 +618,7 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
-          "height": "125",
+          "height": "120",
           "id": 5,
           "interval": null,
           "links": [],
@@ -634,7 +634,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 3,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -726,7 +726,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 3,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -818,7 +818,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 3,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -884,7 +884,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": "250",
       "panels": [
         {
@@ -1921,7 +1921,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -2509,6 +2509,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 18
+  "version": 21
 }
 

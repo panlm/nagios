@@ -15,7 +15,7 @@ zabbixserver=127.0.0.1
 
 
 #CRITICAL WARNING INFO AUDIT
-for i in CRITICAL WARNING ; do
+for i in CRITICAL WARNING INFO ; do
     out=/tmp/${clusterip}_${i}.out
     curl -kX GET \
       "https://$clusterip:9440/PrismGateway/services/rest/v1/alerts/?resolved=false&severity="$i \
