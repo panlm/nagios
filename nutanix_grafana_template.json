@@ -44,10 +44,10 @@
   "hideControls": false,
   "id": null,
   "links": [],
-  "refresh": "10s",
+  "refresh": "5m",
   "rows": [
     {
-      "collapse": false,
+      "collapse": true,
       "height": "256",
       "panels": [
         {
@@ -883,7 +883,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": "250",
       "panels": [
         {
@@ -1400,7 +1400,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -1660,7 +1660,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -1920,7 +1920,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -1943,7 +1943,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "minSpan": 6,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -1952,7 +1952,7 @@
           "repeat": "clustername",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2067,7 +2067,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "minSpan": 12,
+          "minSpan": 6,
           "nullPointMode": "null",
           "percentage": false,
           "pointradius": 5,
@@ -2076,7 +2076,7 @@
           "repeat": "clustername",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 12,
+          "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2126,7 +2126,7 @@
                 "filter": "$clustername"
               },
               "item": {
-                "filter": "/VM Memory Usage/"
+                "filter": "/^(?!NTNX-).* VM Memory Usage.*$/"
               },
               "mode": 0,
               "options": {
@@ -2158,6 +2158,254 @@
               "label": null,
               "logBase": 1,
               "max": "100",
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_ZABBIX}",
+          "fill": 1,
+          "id": 20,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "clustername",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Nutanix Virtual Machines"
+              },
+              "functions": [
+                {
+                  "def": {
+                    "category": "Filter",
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ],
+                    "name": "top",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ],
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)"
+                }
+              ],
+              "group": {
+                "filter": "$group"
+              },
+              "host": {
+                "filter": "$clustername"
+              },
+              "item": {
+                "filter": "/IOPS/"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Top 10  VM IOPS in $clustername",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_ZABBIX}",
+          "fill": 1,
+          "id": 21,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 6,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": "clustername",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "application": {
+                "filter": "Nutanix Virtual Machines"
+              },
+              "functions": [
+                {
+                  "def": {
+                    "category": "Filter",
+                    "defaultParams": [
+                      5,
+                      "avg"
+                    ],
+                    "name": "top",
+                    "params": [
+                      {
+                        "name": "number",
+                        "type": "int"
+                      },
+                      {
+                        "name": "value",
+                        "options": [
+                          "avg",
+                          "min",
+                          "max",
+                          "sum",
+                          "count",
+                          "median"
+                        ],
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "params": [
+                    "10",
+                    "avg"
+                  ],
+                  "text": "top(10, avg)"
+                }
+              ],
+              "group": {
+                "filter": "$group"
+              },
+              "host": {
+                "filter": "$clustername"
+              },
+              "item": {
+                "filter": "/^(?!NTNX-).*Bytes.*$/"
+              },
+              "mode": 0,
+              "options": {
+                "showDisabledItems": false
+              },
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Top 10  VM Network in $clustername",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
               "min": null,
               "show": true
             },
@@ -2260,6 +2508,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 14
+  "version": 16
 }
 
