@@ -53,7 +53,7 @@
         {
           "cacheTimeout": null,
           "colorBackground": false,
-          "colorValue": false,
+          "colorValue": true,
           "colors": [
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
@@ -85,7 +85,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 2,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -146,7 +146,7 @@
         {
           "cacheTimeout": null,
           "colorBackground": false,
-          "colorValue": false,
+          "colorValue": true,
           "colors": [
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
@@ -176,7 +176,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 3,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -236,7 +236,7 @@
         {
           "cacheTimeout": null,
           "colorBackground": false,
-          "colorValue": false,
+          "colorValue": true,
           "colors": [
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
@@ -267,7 +267,7 @@
             }
           ],
           "maxDataPoints": 100,
-          "minSpan": 3,
+          "minSpan": null,
           "nullPointMode": "connected",
           "nullText": null,
           "postfix": "",
@@ -2509,6 +2509,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 21
+  "version": 22
 }
 
