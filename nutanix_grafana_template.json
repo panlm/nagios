@@ -47,7 +47,7 @@
   "refresh": "5m",
   "rows": [
     {
-      "collapse": true,
+      "collapse": false,
       "height": "256",
       "panels": [
         {
@@ -60,7 +60,8 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
-          "format": "none",
+          "decimals": null,
+          "format": "percent",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -152,7 +153,7 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
-          "format": "none",
+          "format": "percent",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -242,7 +243,7 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "datasource": "${DS_ZABBIX}",
-          "format": "none",
+          "format": "percent",
           "gauge": {
             "maxValue": 100,
             "minValue": 0,
@@ -883,7 +884,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "height": "250",
       "panels": [
         {
@@ -1920,7 +1921,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": true,
+      "collapse": false,
       "height": 250,
       "panels": [
         {
@@ -1952,7 +1953,7 @@
           "repeat": "clustername",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2076,7 +2077,7 @@
           "repeat": "clustername",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2200,7 +2201,7 @@
           "repeat": "clustername",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2324,7 +2325,7 @@
           "repeat": "clustername",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -2508,6 +2509,6 @@
   },
   "timezone": "browser",
   "title": "HTSec-Nutanix",
-  "version": 16
+  "version": 18
 }
 
