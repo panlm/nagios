@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zabbix_export>
+x_export>
     <version>3.2</version>
-    <date>2017-09-07T02:57:13Z</date>
+    <date>2017-09-08T07:11:38Z</date>
     <groups>
         <group>
             <name>CVM</name>
@@ -44,6 +43,49 @@
                 </application>
             </applications>
             <items>
+                <item>
+                    <name>cluster.py</name>
+                    <type>10</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>cluster.py[&quot;-D&quot;,&quot;-H&quot;,&quot;{HOSTNAME}&quot;,&quot;-z&quot;,-v,3,-u,{$SNMPV3_USER},-X,{$SNMPV3_AES_KEY},-A,{$SNMPV3_SHA_KEY}]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>2</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Nutanix Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
                 <item>
                     <name>Cluster Alert CRITICAL</name>
                     <type>2</type>
@@ -186,7 +228,7 @@
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units>%</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -401,7 +443,7 @@
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units>%</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -530,7 +572,7 @@
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units>%</units>
+                    <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -637,6 +679,49 @@
                     <privatekey/>
                     <port/>
                     <description>Cluster VM Count hypervisorVmCount.*</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Nutanix Cluster</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>listalert.sh</name>
+                    <type>10</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>listalert.sh[&quot;{HOSTNAME}&quot;,&quot;admin&quot;,&quot;nutanix/4u&quot;]</key>
+                    <delay>30</delay>
+                    <history>90</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>2</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -818,6 +903,50 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>citFreeCapacityPercent[{#SNMPVALUE}]</key>
+                            <delay>300</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>0</value_type>
+                            <allowed_hosts/>
+                            <units>%</units>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params>100*(last(&quot;citTotalCapacity[{#SNMPVALUE}]&quot;) - last(&quot;citUsedCapacity[{#SNMPVALUE}]&quot;)) / last(&quot;citTotalCapacity[{#SNMPVALUE}]&quot;)</params>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Free Storage Capacity of the Container</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Nutanix Containers</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Container $1 Free Storage (percent)</name>
+                            <type>15</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>citFreeCapacity[{#SNMPVALUE}]</key>
                             <delay>300</delay>
                             <history>7</history>
                             <trends>365</trends>
@@ -1050,6 +1179,22 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
+                            <expression>{Template SNMP Nutanix Cluster:citFreeCapacity[{#SNMPVALUE}].last(0)} &lt; 10</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Free storage is less than 10% on Nutanix Container {#SNMPVALUE}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>3</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
                             <expression>{Template SNMP Nutanix Cluster:citFreeCapacityPercent[{#SNMPVALUE}].last(0)} &lt; 20</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
@@ -1066,6 +1211,28 @@
                                 <dependency>
                                     <name>Free storage is less than 10% on Nutanix Container {#SNMPVALUE}</name>
                                     <expression>{Template SNMP Nutanix Cluster:citFreeCapacityPercent[{#SNMPVALUE}].last(0)} &lt; 10</expression>
+                                    <recovery_expression/>
+                                </dependency>
+                            </dependencies>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template SNMP Nutanix Cluster:citFreeCapacity[{#SNMPVALUE}].last(0)} &lt; 20</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>Free storage is less than 20% on Nutanix Container {#SNMPVALUE}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies>
+                                <dependency>
+                                    <name>Free storage is less than 10% on Nutanix Container {#SNMPVALUE}</name>
+                                    <expression>{Template SNMP Nutanix Cluster:citFreeCapacity[{#SNMPVALUE}].last(0)} &lt; 10</expression>
                                     <recovery_expression/>
                                 </dependency>
                             </dependencies>
